@@ -14,8 +14,10 @@ class Application
     elsif req.path.match(/search/)
       search_term = req.params["q"]
       resp.write handle_search(search_term)
+      
     elsif req.path.match(/cart/)
       resp.write cart
+      
     elsif req.path.match(/add/)
       item_to_add = req.params["item"]
       resp.write add_in_cart(item_to_add)
@@ -45,7 +47,7 @@ class Application
   def add_in_cart(item_to_add)
     if @@items.include?(item_to_add)
       @@cart << item_to_add
-      return @@cart
+      return "added #{item_to_add}"
     else 
       return "We don't have that item"
     end
