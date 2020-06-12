@@ -16,6 +16,9 @@ class Application
       resp.write handle_search(search_term)
     elsif req.path.match(/cart/)
       resp.write cart
+    elsif req.path.match(/add)
+      item_to_add = req.params["item"]
+      resp.write add_in_cart(item_to_add)
     else
       resp.write "Path Not Found"
     end
@@ -37,5 +40,12 @@ class Application
     else 
       return "Your cart is empty"
     end
+  end 
+  
+  def add_in_cart(item_to_add)
+    if @@items.include?(item_to_add)
+      @@cart << item_to_add
+    else 
+      return "We don't have that item"
   end 
 end
